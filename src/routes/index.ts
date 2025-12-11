@@ -50,7 +50,7 @@ function createAppRouter() {
   router.beforeEach((to, from, next) => {    
     const authorizationStore = useAuthorizationStore();        
     if (to.matched.some((record) => record.meta.auth)) {      
-      const token = localStorage.getItem("token");
+      const token = localStorage.getItem(environmentStore.data.localStorageToken);
 
       if (!token) {
         return next({

@@ -100,6 +100,7 @@
             pageStatus.value = 'form-login';
             
             let response = await authorizationStore.login(form) as AxiosResponse;
+            
             if(response && response.status === 200){
                 router.replace('/');
             }

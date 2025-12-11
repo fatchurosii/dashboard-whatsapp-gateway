@@ -6,5 +6,5 @@ export interface ILoginPayload {
 export interface IUserProfile {
     authorized: boolean,
     id: string,    
-    name: string,
+    username: string,
 }
