@@ -1,19 +1,13 @@
-import MasterBrand from "@src/views/master/brand/Index.vue"
-import MasterCategory from "@src/views/master/category/Index.vue"
+import MasterUser from "@src/views/master/user/Index.vue"
 let routes = [
     {
         path: '/master',
         children:[
             {
-                path: 'brand',      
-                name: 'master-brand',
-                component: MasterBrand
-            },   
-            {
-                path: 'category',    
-                name: 'master-category',            
-                component: MasterCategory
-            },          
+              path: 'user',
+              name: 'master-user',
+              component: MasterUser
+            },
         ]
 
     }    
