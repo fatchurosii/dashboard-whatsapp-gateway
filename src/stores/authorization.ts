@@ -16,7 +16,7 @@ export const useAuthorizationStore = defineStore("authorization", () => {
     localStorage.setItem(environmentStore.data.localStorageToken, token);
   }
 
-  function setProfileData(payload: any) {
+  function setProfileData(payload: IUserProfile | null) {
     data = {
       authorized: payload ? true : false,
       id: payload?.id || "",
@@ -25,7 +25,7 @@ export const useAuthorizationStore = defineStore("authorization", () => {
   }
 
   function logout() {
-    api().get("api/user/logout");
+    api().post("api/auth/logout");
     setToken("");
     setProfileData(null);
   }
@@ -33,7 +33,6 @@ export const useAuthorizationStore = defineStore("authorization", () => {
   async function getProfile(setToAuthorizationState = false) {
     try {
       const response = await api().get("api/auth/profile");
-
       if (setToAuthorizationState) {
         setProfileData(response.data.data);
       }
@@ -49,6 +48,7 @@ export const useAuthorizationStore = defineStore("authorization", () => {
     try {
       const response = await api().post("api/auth/login", payload);
       setToken(response.data.data.token);
+      
       return response;
     } catch (error) {
       throw error;

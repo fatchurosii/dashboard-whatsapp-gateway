@@ -57,12 +57,9 @@ function createAppRouter() {
           name: "login",
         });
       }
-      if (authorizationStore.data.authorized === true) {
-        return next()
-      }      
-
+      
       if (!authorizationStore.data.authorized) {       
-        authorizationStore.getProfile(false).then(() => {
+        authorizationStore.getProfile(true).then(() => {
           return next()
         }).catch(() => {
           return next({
@@ -70,6 +67,12 @@ function createAppRouter() {
           });
         })
       }
+      
+      if (authorizationStore.data.authorized === true) {
+        return next()
+      }      
+
+      
     } else {     
       return next()
     }
