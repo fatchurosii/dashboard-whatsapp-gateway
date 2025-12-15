@@ -34,7 +34,7 @@ export const useAuthorizationStore = defineStore("authorization", () => {
     try {
       const response = await api().get("api/auth/profile");
       if (setToAuthorizationState) {
-        setProfileData(response.data.data);
+        setProfileData(response.data.user);
       }
       return response;
     } catch (error) {

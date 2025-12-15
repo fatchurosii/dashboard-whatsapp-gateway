@@ -90,11 +90,9 @@ export const useUserStore = defineStore("user", () => {
         search: table.search,
       };
       const res = await api().get(`api/users`, { params });
-      
-      const response = res?.data?.data;
-      
-      setData(response?.data);
-      setTotalData(response?.meta?.total || 0);
+      const response = res?.data;
+      setData(response.data)
+      setTotalData(response?.meta?.total  || 0);
       
       return res;
     } catch (err) {

@@ -85,7 +85,6 @@
   import { DataTable } from '@src/components/main';
   
   const userStore = useUserStore();
-  
   console.log(userStore.getData())
   
   onMounted(() => {
