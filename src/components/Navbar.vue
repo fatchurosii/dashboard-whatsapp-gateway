@@ -65,7 +65,7 @@
                                         <div class="fw-bold d-flex align-items-center fs-5">
                                         </div>
                                         <a href="#"
-                                            class="fw-semibold text-muted text-hover-primary fs-7">{{authorizationStore.data}}</a>
+                                            class="fw-semibold text-muted text-hover-primary fs-7">{{authorizationStore?.data?.username}}</a>
                                     </div>
                                     <!--end::Username-->
                                 </div>
@@ -111,7 +111,6 @@
     import { useAuthorizationStore } from '@src/stores/authorization';    
     import { useRouter } from 'vue-router';
     const authorizationStore = useAuthorizationStore();
-    
     const router = useRouter()
     function logout(){
         authorizationStore.logout();

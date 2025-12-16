@@ -6,22 +6,22 @@ import { useEnvironmentStore } from "@src/stores/environment";
 
 export const useAuthorizationStore = defineStore("authorization", () => {
   const environmentStore = useEnvironmentStore();
-  let data = reactive({
+  const data = reactive<IUserProfile>({
     authorized: false,
     id: "",
     username: "",
-  }) as IUserProfile;
+  });
 
   function setToken(token: string) {
     localStorage.setItem(environmentStore.data.localStorageToken, token);
   }
 
   function setProfileData(payload: IUserProfile | null) {
-    data = {
-      authorized: payload ? true : false,
-      id: payload?.id || "",
-      username: payload?.username || "",
-    };
+    Object.assign(data, {
+      authorized: !!payload,
+      id: payload?.id ?? "",
+      username: payload?.username ?? "",
+    });
   }
 
   function logout() {
@@ -34,7 +34,7 @@ export const useAuthorizationStore = defineStore("authorization", () => {
     try {
       const response = await api().get("api/auth/profile");
       if (setToAuthorizationState) {
-        setProfileData(response.data.user);
+        setProfileData(response.data?.data?.data);
       }
       return response;
     } catch (error) {

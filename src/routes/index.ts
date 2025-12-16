@@ -47,7 +47,7 @@ function createAppRouter() {
     },
   });
 
-  router.beforeEach((to, from, next) => {    
+  router.beforeEach((to, _from, next) => {
     const authorizationStore = useAuthorizationStore();        
     if (to.matched.some((record) => record.meta.auth)) {      
       const token = localStorage.getItem(environmentStore.data.localStorageToken);
@@ -62,7 +62,7 @@ function createAppRouter() {
         return next()
       }      
       
-      if (!authorizationStore.data.authorized) {       
+      if (!authorizationStore.data.authorized) {
         authorizationStore.getProfile(true).then(() => {
           return next()
         }).catch(() => {
